@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        function copyToClipboard(text) {
+            var tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+        }
+    </script>
+</head>
+<body>
+    <div id = "results">
+        <h1>Resultados para "{{ query }}"</h1>
+        <p>Se encontraron {{ count }} resultado(s).</p>
+        {% for result in results %}
+        <h3>{{ result['archivo'] }}</h3>
+        <p id="transcripciones">{{ result['resultado_whisper']|replace(query, '<strong>' + query + '</strong>')|safe }}</p>
+        <a id="botton" href="#" onclick="copyToClipboard('{{ result['directorio']|replace('\\', '\\\\')+'/'+result['archivo']|replace('\\', '\\\\') }}')">Copiar ruta del video</a>
+        {% endfor %}
+        <form id="boton_volver" action="{{ url_for('index') }}">
+            <button type="submit">Volver al inicio</button>
+        </form>
+    </div>
+</body>
+</html>
