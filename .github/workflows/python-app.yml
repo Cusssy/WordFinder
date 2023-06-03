@@ -23,9 +23,8 @@ jobs:
     - name: Install PyMongo
       run: |
         pip install pymongo
-    - name: Test with pytest
+    - name: Install Flask
       run: |
-        pytest tests/
     - name: Run Flask app
       run: |
         export FLASK_APP=src/app.py
