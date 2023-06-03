@@ -25,6 +25,7 @@ jobs:
         pip install pymongo
     - name: Install Flask
       run: |
+        pip install flask
     - name: Run Flask app
       run: |
         export FLASK_APP=src/app.py
