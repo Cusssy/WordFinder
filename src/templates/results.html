@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://src.cusssy.com/ico/wordfinder.ico">
     <script>
         function copyToClipboard(text) {
             var tempInput = document.createElement("input");
@@ -21,10 +22,15 @@
     <div id = "results">
         <h1>Resultados para "{{ query }}"</h1>
         <p>Se encontraron {{ count }} resultado(s).</p>
+        <form id="boton_volver" action="{{ url_for('index') }}">
+            <button type="submit">Volver al inicio</button>
+        </form>
         {% for result in results %}
-        <h3>{{ result['archivo'] }}</h3>
-        <p id="transcripciones">{{ result['resultado_whisper']|replace(query, '<strong>' + query + '</strong>')|safe }}</p>
-        <a id="botton" href="#" onclick="copyToClipboard('{{ result['directorio']|replace('\\', '\\\\')+'/'+result['archivo']|replace('\\', '\\\\') }}')">Copiar ruta del video</a>
+        <div id="div_result" class="contenedor">
+            <h3>{{ result['archivo'] }}</h3>
+            <p id="transcripciones">{{ result['resultado_whisper']|replace(query, '<strong>' + query + '</strong>')|safe }}</p>
+            <a id="botton" href="#" onclick="copyToClipboard('{{ result['directorio']|replace('\\', '\\\\')+'/'+result['archivo']|replace('\\', '\\\\') }}')">Copiar ruta del video</a>
+        </div>
         {% endfor %}
         <form id="boton_volver" action="{{ url_for('index') }}">
             <button type="submit">Volver al inicio</button>

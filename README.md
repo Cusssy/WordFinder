@@ -8,7 +8,7 @@ Podras acceder a el desde la pagina web que tu vas alojar, te dira en que parte 
 vas a neceistar instalar estas 3 librerias 
 
 ````
-pip install flask, pymongo, openai-whisper
+pip install flask pymongo openai-whisper
 ````
 
 ## Como usar:
